@@ -15,9 +15,9 @@ function httpGet(barcode) {
             var pageObject = JSON.parse(this.responseText);
             if (pageObject.product) {
                 var allergens = getAllergens(pageObject);
-                $('#barcodeForm').innerHtml = allergens.en
+                //$('#barcodeForm').innerHtml = allergens.en
             } else {
-                $('#previousBarcode').html(barcode);
+                $('#previousBarcode').html("<h2>" + barcode + "</h2>");
                 $('#previousAllergens').html("Unfortunately, our database does not yet include this product. We're working on it!");
             }
         }
@@ -61,9 +61,9 @@ function httpGet(barcode) {
         
         // set content of #previousBarcode to barcode
         if (product.product_name_en) {
-            $('#previousBarcode').html(product.product_name_en);
+            $('#previousBarcode').html("<h2>" + product.product_name_en + "</h2>");
         } else {
-            $('#previousBarcode').html(barcode);
+            $('#previousBarcode').html("<h2>" + barcode + "</h2>");
         }
         
         // set content of #preciousAllergens to allergensEnglish
@@ -74,7 +74,7 @@ function httpGet(barcode) {
             allergensHtml += currentAllergenHtml;
         }
         
-        $('#previousAllergens').html("<ul>" + allergensHtml + "</ul>");
+        $('#previousAllergens').html("<p>Allergens:</p><ul>" + allergensHtml + "</ul>");
         
         // use <ul>
         

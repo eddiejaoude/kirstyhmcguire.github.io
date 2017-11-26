@@ -1,13 +1,16 @@
 <html>
     <head>
         <script src="jquery-3.2.1.min.js"></script>
+        <link rel="stylesheet" href="allerbye.css">
     </head>
-    <form id="barcodeForm">
-        Barcode:<br>
-        <input type="text" id="barcode" name="barcode"><br>
-        <input type="submit" id="submit" name="submit">
-        <script src="allergens.js"></script>
-    </form>
+    <body>
+        <h1>Allerbye</h1>
+        <form id="barcodeForm">
+            <span>Barcode: </span><input type="text" id="barcode" name="barcode">
+            <input type="submit" id="submit" name="submit">
+            <script src="allergens.js"></script>
+        </form>
+    </body>
     <p id="previousBarcode"></p>
     <p id="previousAllergens"></p>
 </html>
