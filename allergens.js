@@ -9,6 +9,7 @@ function httpGet(barcode) {
     console.log("in function");
     var xmlhttp = new XMLHttpRequest();
     var url = "https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json";
+    console.log(url);
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var pageObject = JSON.parse(this.responseText);
@@ -22,14 +23,20 @@ function httpGet(barcode) {
 
     function getAllergens(pageObject) {
         var product = pageObject.product;
-        var allergens = product.allergens_hierarchy;
+        var allergens = product.allergens.split(",");
         var allergensEnglish = [];
         
         for (var i = 0; i < allergens.length; i++) {
-            var allergen = allergens[i].split(":");
-            console.log(allergen[0] + " " + allergen[1]);
-            if (allergen[0] === "en") {
-                allergensEnglish.push(allergen[1]);
+            var allergen = allergens[i];
+            console.log(allergen);
+            var found = false;
+            for (var j = 0; j < allergensEnglish.length; j++) {
+                if (allergensEnglish[j] === allergen.trim()) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                allergensEnglish.push(allergen.trim());
             }
         }
         /*
