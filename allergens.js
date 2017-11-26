@@ -28,6 +28,7 @@ function httpGet(barcode) {
 
     function getAllergens(pageObject) {
         var product = pageObject.product;
+        
         var allergens = product.allergens.split(",");
         var allergensEnglish = [];
         
@@ -59,7 +60,11 @@ function httpGet(barcode) {
         console.log("allergens in english: " + allergensEnglish);
         
         // set content of #previousBarcode to barcode
-        $('#previousBarcode').html(barcode);
+        if (product.product_name_en) {
+            $('#previousBarcode').html(product.product_name_en);
+        } else {
+            $('#previousBarcode').html(barcode);
+        }
         
         // set content of #preciousAllergens to allergensEnglish
         var allergensHtml = "";
