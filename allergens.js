@@ -13,8 +13,13 @@ function httpGet(barcode) {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var pageObject = JSON.parse(this.responseText);
-            var allergens = getAllergens(pageObject);
-            $('#barcodeForm').innerHtml = allergens.en
+            if (pageObject.product) {
+                var allergens = getAllergens(pageObject);
+                $('#barcodeForm').innerHtml = allergens.en
+            } else {
+                $('#previousBarcode').html(barcode);
+                $('#previousAllergens').html("Unfortunately, our database does not yet include this product. We're working on it!");
+            }
         }
     };
     
